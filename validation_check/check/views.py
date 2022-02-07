@@ -32,7 +32,9 @@ class validation(APIView):
             return AGE
 
         def phone_check(p):
-            ph = p[-10:]
+            p1=p.replace("-","")
+            p2=p1.replace(" ","")
+            ph = p2[-10:]
             try:
                 phone_number = phonenumbers.parse(f"+91{ph}")
                 valid = phonenumbers.is_valid_number(phone_number)
