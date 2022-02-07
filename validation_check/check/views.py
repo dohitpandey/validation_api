@@ -57,7 +57,8 @@ class validation(APIView):
             return  EMAIL
 
         def pincode_check(pc):
-            url = f"https://api.postalpincode.in/pincode/{pc}"
+            pin=pc.replace(" ","")
+            url = f"https://api.postalpincode.in/pincode/{pin}"
             response = requests.request("GET", url)
             data = json.loads(response.text)
             if data[0].get("Status")=="Success":
