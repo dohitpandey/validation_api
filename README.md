@@ -1,3 +1,5 @@
+This api is used for validating user data such as name, age, email, phone number, pincode on the backend.
+
 For how to use the API visit http://dohitpandey.cf/api-docs
 
 For performing checks separate functions are defined here validation_api/validation_check/check/views.py
