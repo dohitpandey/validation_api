@@ -24,7 +24,7 @@ class validation(APIView):
         def age_check(a):
             try:
                 if 0 < int(a) < 120:
-                    AGE = "valid"
+                    AGE = "Valid"
                 else:
                     AGE = "Invalid"
             except:
