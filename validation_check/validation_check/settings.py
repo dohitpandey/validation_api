@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-=dy+iz152_09l&j4ky!we0k#i&%8mw52u$r28y2(l-7+by&((1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['dohitpandey.pythonanywhere.com']
+ALLOWED_HOSTS = ['dohitpandey.pythonanywhere.com','127.0.0.1']
 
 
 # Application definition
@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework_swagger',
+    'drf_yasg',
     'check',
 ]
 
@@ -117,7 +119,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
+# DEBUG = False
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 

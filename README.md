@@ -1,17 +1,7 @@
-This api is used for validating user data such as name, age, email, phone number, pincode on the backend.
+This is the source code for a Lead Generation Validation API that is used to validate user data such as name, age, email, phone number, and pin code at the backend. The API has separate functions defined for performing checks, which can be found in the validation_check_methods.py file located at validation_api/validation_check/check/common/validation_check_methods.py.
 
-For how to use the API visit http://dohitpandey.cf/api-docs
+If you wish to add a new check feature to the API, you can fork the project and add your validation check method at the end of the validation_check_methods.py file. When defining a function, it must follow a specific naming convention, with the function name being in the format "inputdata_check". Additionally, the function must accept one parameter, which is the input data, and after checking the validity of the input data, it should return either "Valid" or "Invalid".
 
-For performing checks separate functions are defined here validation_api/validation_check/check/views.py
+Once you have defined your new validation check method, you will need to add an if block to the views.py file, which can be found at validation_api/validation_check/check/views.py, and call the method you defined earlier within this if block.
 
-To add a new check feature please fork the project and add your code here -> validation_api/validation_check/check/views.py from line 69
-
-for defining a function follow the following criteria:
-
-  Function name has to be in this format -> inputdata_check
-  
-  it must accept 1 parameter which is inputdata
-  
-  after checking validity of the inputdata return 'Valid' or 'Invalid'
-  
-Confident about your logic and code ? finally make a pull request.
+If you are confident about the logic and code you have written, you can then make a pull request to have your changes reviewed and potentially added to the Lead Generation Validation API.

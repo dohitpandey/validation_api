@@ -1,92 +1,51 @@
-from rest_framework.views import APIView
+from check.common import validation_check_methods
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework.response import Response
-import re
-import phonenumbers
-import json
-import requests
+from rest_framework.views import APIView
 
-class validation(APIView):
 
-    def post(self,request):
-        Name=None
-        Age=None
-        Phone=None
-        Email=None
-        Pincode=None
+class Validation(APIView):
+    @swagger_auto_schema(operation_id='validate_input', request_body=openapi.Schema(
+        type='object',
+        properties={
+            'Name': openapi.Schema(type='string', example='John Doe'),
+            'Age': openapi.Schema(type='string', example='30'),
+            'Phone': openapi.Schema(type='string', example='+91 1234567890'),
+            'Email': openapi.Schema(type='string', example='johndoe@example.com'),
+            'Pincode': openapi.Schema(type='string', example='400001')
+        }
+    ), responses={200: openapi.Schema(
+        type='object',
+        properties={
+            'Name': openapi.Schema(type='string', example='Valid'),
+            'Age': openapi.Schema(type='string', example='Invalid'),
+            'Phone': openapi.Schema(type='string', example='Valid'),
+            'Email': openapi.Schema(type='string', example='Valid'),
+            'Pincode': openapi.Schema(type='string', example='Valid')
+        }
+    )})
 
-        def name_check(n):
-            if re.search("^(?!\s)[^0-9!@#$%^&*()_+\-=\[\]{}\"\';:?/><.,`~|\n]{2,50}$", n):
-                NAME="Valid"
-            else:
-                NAME="Invalid"
-            return NAME
-
-        def age_check(a):
-            try:
-                if 0 < int(a) < 120:
-                    AGE = "Valid"
-                else:
-                    AGE = "Invalid"
-            except:
-                AGE = "Invalid"
-            return AGE
-
-        def phone_check(p):
-            p1=p.replace("-","")
-            p2=p1.replace(" ","")
-            ph = p2[-10:]
-            try:
-                phone_number = phonenumbers.parse(f"+91{ph}")
-                valid = phonenumbers.is_valid_number(phone_number)
-                if valid == True:
-                    PHONE = "Valid"
-                else:
-                    PHONE = "Invalid"
-            except:
-                PHONE = "Invalid"
-            return PHONE
-
-        def email_check(e):
-            if re.search("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]{2,}@[a-zA-Z0-9-]{2,}(?:\.[a-zA-Z0-9-]{2,})+$", e):
-                if ".@" not in e and e[0]!=".":
-                    EMAIL="Valid"
-                else:
-                    EMAIL = "Invalid"
-            else:
-                EMAIL="Invalid"
-            return  EMAIL
-
-        def pincode_check(pc):
-            pin=pc.replace(" ","")
-            url = f"https://api.postalpincode.in/pincode/{pin}"
-            response = requests.request("GET", url)
-            data = json.loads(response.text)
-            if data[0].get("Status")=="Success":
-                PINCODE="Valid"
-            else:
-                PINCODE="Invalid"
-            return PINCODE
-
-        if 'name' in request.data:
-            name=request.data['name']
-            Name=name_check(name)
-        if 'age' in request.data:
-            age=request.data['age']
-            Age=age_check(age)
-        if 'phone' in request.data:
-            phone=request.data['phone']
-            Phone=phone_check(phone)
-        if 'email' in request.data:
-            email=request.data['email']
-            Email=email_check(email)
-        if 'pincode' in request.data:
-            pincode=request.data['pincode']
-            Pincode=pincode_check(pincode)
-
-        return Response({
-            'Name':Name,
-            'Age':Age,
-            'Phone':Phone,
-            'Email':Email,
-            'Pincode':Pincode
-        })
+    def post(self, request):
+        response = {}
+        if 'Name' in request.data:
+            name = str(request.data['Name'])
+            Name = validation_check_methods.name_check(name)
+            response['Name'] = Name
+        if 'Age' in request.data:
+            age = request.data['Age']
+            Age = validation_check_methods.age_check(age)
+            response['Age'] = Age
+        if 'Phone' in request.data:
+            phone = str(request.data['Phone'])
+            Phone = validation_check_methods.phone_check(phone)
+            response['Phone'] = Phone
+        if 'Email' in request.data:
+            email =str(request.data['Email'])
+            Email = validation_check_methods.email_check(email)
+            response['Email'] = Email
+        if 'Pincode' in request.data:
+            pincode = str(request.data['Pincode'])
+            Pincode = validation_check_methods.pincode_check(pincode)
+            response['Pincode'] = Pincode
+        return Response(response)
