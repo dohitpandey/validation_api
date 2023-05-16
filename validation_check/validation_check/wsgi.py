@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'validation_check.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'validation_check.validation_check.settings')
 
 application = get_wsgi_application()
