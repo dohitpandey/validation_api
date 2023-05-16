@@ -1,4 +1,4 @@
-from check.common import validation_check_methods
+from validation_check.check.common import validation_check_methods
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.response import Response
