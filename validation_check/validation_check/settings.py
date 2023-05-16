@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'validation_check.urls'
+ROOT_URLCONF = 'validation_check.validation_check.urls'
 
 TEMPLATES = [
     {
