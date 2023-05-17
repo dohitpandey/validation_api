@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'drf_yasg',
     'validation_check.check',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'validation_check.validation_check.urls'
@@ -121,6 +123,7 @@ USE_TZ = True
 
 STATIC_URL = os.getcwd()+'/validation_check/static/'
 STATIC_ROOT ='validation_check/static'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFileStorage'
 # DEBUG = False
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
