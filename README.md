@@ -5,3 +5,5 @@ If you wish to add a new check feature to the API, you can fork the project and 
 Once you have defined your new validation check method, you will need to add an if block to the views.py file, which can be found at validation_api/validation_check/check/views.py, and call the method you defined earlier within this if block.
 
 If you are confident about the logic and code you have written, you can then make a pull request to have your changes reviewed and potentially added to the Lead Generation Validation API.
+
+THIS PROJECT IS WORKING ON LOCAL SETUP(WINDOWS 10)
